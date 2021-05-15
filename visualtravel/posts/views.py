@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from datetime import datetime
+from . import models
 
-# Create your views here.
+def all_posts(request):
+    now = datetime.now()
+    hungry = True
+    return render(request, "all_posts.html", context={"now": now, "hungry": hungry})
+
