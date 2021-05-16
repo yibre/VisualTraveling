@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.db import models
 from core import models as core_models
+from django_countries.fields import CountryField
+from django.urls import reverse
 
 class Photo(core_models.TimeStampedModel):
     """ Photo Model Definition """
@@ -16,8 +18,10 @@ class Post(core_models.TimeStampedModel):
     writter = models.ForeignKey("users.User", related_name="posts", on_delete=models.CASCADE)
     title = models.CharField(max_length=80)
     contents = models.TextField()
-    likes = models.IntegerField()
-    
+    likes = models.IntegerField( default = 0)
+    location_info = models.CharField(max_length=80, blank=True, null=True)
+    country = CountryField(blank=True, null=True, blank_label='South Korea')
+    camera = models.CharField(max_length=80, blank=True, null=True)
     latitude = models.DecimalField(
         max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(
@@ -31,8 +35,11 @@ class Post(core_models.TimeStampedModel):
         return reverse("posts:detail", kwargs={"pk": self.pk})
 
     def get_photos(self):
-        photo, = self.photos.all()[:1]
-        return photo.file.url
+        try:
+            photo, = self.photos.all()[:1]
+            return photo.file.url
+        except ValueError:
+            return None
 
 
 

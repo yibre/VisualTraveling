@@ -1,6 +1,7 @@
-from django.views.generic import ListView, DetailView, View, UpdateView
-from django.shortcuts import render
-from . import models
+from django.views.generic import ListView, DetailView, View, UpdateView, FormView
+from django.shortcuts import render, redirect, reverse
+from . import models, forms
+from django.contrib import messages
 
 
 class HomeView(ListView):
@@ -22,16 +23,33 @@ class EditPostView(UpdateView):
         "title",
         "writter",
         "contents",
+        "country",
+        "location_info",
         "latitude",
         "longitude"
     }
 
-"""
-def post_detail(request, pk):
-    print(pk)
-    return render(request, "posts/detail.html")
+class EditPhotoView(UpdateView):
 
-def all_posts(request):
-    all_posts = models.Post.objects.all()
-    return render(request, "posts/post.html", context={"postinfo": all_posts})
-"""
+    model = models.Photo
+    template_name = "posts/photo_edit.html"
+    pk_url_kwarg = "photo_pk"
+    success_message = "Photo Updated"
+    fields = ("caption",)
+
+    def get_success_url(self):
+        room_pk = self.kwargs.get("post_pk")
+        return reverse("posts:photos", kwargs={"pk": post_pk})
+
+
+class UploadPostView(FormView):
+    """ for update the photos """
+
+    form_class=forms.UploadPostForm
+    template_name = "posts/post_upload.html"
+
+    def form_valid(self, form):
+        post = form.save()
+        post.save()
+        messages.success(self.request, "Post Uploaded")
+        return redirect(reverse("posts:detail", kwargs={"pk": post.pk}))

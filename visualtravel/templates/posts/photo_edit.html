@@ -23,11 +23,13 @@
                         <span>{{error}}</span> 
                     {% endfor %}
                 {% endif %}
-            </div> 
+            </div>
             {% endfor %}
         
             <button>{{cta}}Submit</button>
-            
+            <div>
+                <a href="{% url 'posts:photos' post.pk %}">Edit Photos</a>
+            </div>
         </form> 
 
     </div>
