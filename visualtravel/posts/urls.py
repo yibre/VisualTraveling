@@ -4,6 +4,6 @@ from . import views
 app_name = "posts"
 
 urlpatterns = [
-    #path("", views.RoomDetail.as_view(), name="detail"),
-    #path("search/", views.SearchView.as_view(), name="search"),
+    path("<int:pk>/", views.PostDetail.as_view(), name="detail"),
+    path("<int:pk>/edit/", views.EditPostView.as_view(), name="edit"),   
 ]

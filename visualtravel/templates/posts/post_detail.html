@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+
+{% block page_title %}
+    {{post.title}}
+{% endblock page_title %}
+
+{% block content %}
+
+<img src="{{post.get_photos}}"/>
+{{post.writter}}
+{{post.contents}}
+<a href="{% url 'posts:edit' post.pk %}">Edit Post</a>
+
+
+{% endblock %}

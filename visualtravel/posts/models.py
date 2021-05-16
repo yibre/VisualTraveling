@@ -2,6 +2,16 @@ from django.contrib import admin
 from django.db import models
 from core import models as core_models
 
+class Photo(core_models.TimeStampedModel):
+    """ Photo Model Definition """
+    caption = models.CharField(max_length=80)
+    file = models.ImageField(upload_to="post_photos")
+    post = models.ForeignKey("Post", related_name="photos", on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.caption
+
+
 class Post(core_models.TimeStampedModel):
     writter = models.ForeignKey("users.User", related_name="posts", on_delete=models.CASCADE)
     title = models.CharField(max_length=80)
@@ -20,14 +30,10 @@ class Post(core_models.TimeStampedModel):
     def get_absolute_url(self):
         return reverse("posts:detail", kwargs={"pk": self.pk})
 
-class Photo(core_models.TimeStampedModel):
-    """ Photo Model Definition """
-    caption = models.CharField(max_length=80)
-    file = models.ImageField(upload_to="post_photos")
-    post = models.ForeignKey("Post", related_name="photos", on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.caption
+    def get_photos(self):
+        photo, = self.photos.all()[:1]
+        return photo.file.url
+
 
 
 
