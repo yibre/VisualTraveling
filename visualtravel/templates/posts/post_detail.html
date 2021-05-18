@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 
-
 {% block page_title %}
     {{post.title}}
 {% endblock page_title %}
 
 {% block content %}
-
 <img src="{{post.get_photos}}"/>
-{{post.writter}}
-{{post.contents}}
+<ul class="">
+<li>title: {{post.title}}</li>
+<li>author: {{post.writter}}</li>
+<li>contents: {{post.contents}}</li>
+<li>camera: {{post.camera}}</li>
+</ul>
 <a href="{% url 'posts:edit' post.pk %}">Edit Post</a>
 
 

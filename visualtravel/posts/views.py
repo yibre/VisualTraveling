@@ -38,7 +38,7 @@ class EditPhotoView(UpdateView):
     fields = ("caption",)
 
     def get_success_url(self):
-        room_pk = self.kwargs.get("post_pk")
+        post_pk = self.kwargs.get("post_pk")
         return reverse("posts:photos", kwargs={"pk": post_pk})
 
 
@@ -53,3 +53,13 @@ class UploadPostView(FormView):
         post.save()
         messages.success(self.request, "Post Uploaded")
         return redirect(reverse("posts:detail", kwargs={"pk": post.pk}))
+
+def delete_photo(request, post_pk, photo_pk):
+    # user = request.user
+    try:
+        post = models.Post.objects.get(pk=post_pk)
+        models.Photo.objects.filter(pk=photo_pk).delete()
+        messages.success(request, "Photo Deleted")
+        return redirect(reverse("posts:photos", kwargs={"pk": post_pk}))
+    except models.Post.DoesNotExist:
+        return redirect(reverse("core:home"))
