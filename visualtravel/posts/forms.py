@@ -30,3 +30,16 @@ class UploadPostForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         post = super().save(commit=False)
         return post
+
+class CreatePhotoForm(forms.ModelForm):
+    class Meta:
+        model = models.Photo
+        fields = ("caption", "file")
+
+    def save(self, pk, *args, **kwargs):
+        photo = super().save(commit=False)
+        print(pk)
+
+        post = models.Photo.objects.get(pk=pk)
+        photo.post = post
+        photo.save()

@@ -8,15 +8,16 @@
 {% endblock search-bar %}
 
 {% block content %}
-
-    <div class="bg-gray-50 container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center border p-6 border-gray-400">
+<br>
+<img src="{{post.get_photos}}" align="left" class="lg:w-1/2">
+    <div>
 
         <form method="POST" class="w-full" enctype="multipart/form-data">
             {% csrf_token %}
         
             {% for field in form %}
             <div>
-                <div class="text-red-600 bg-red-100">{{field.label}}</div>
+                <div>{{field.label}}</div>
                 <div>{{field}}</div>
                 {% if field.errors %}
                     {% for error in field.errors %}
@@ -25,10 +26,13 @@
                 {% endif %}
             </div> 
             {% endfor %}
-        
-            <button>{{cta}}Submit</button>
-            
+            <button>
+                {{cta}}Submit
+            </button>            
+            <div class="mt-5">
+                <a href="{% url 'posts:photos' post.pk %}">Edit Photos</a>
+            </div>
         </form> 
 
     </div>
-{% endblock content %} 
+{% endblock content %}

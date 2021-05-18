@@ -16,17 +16,21 @@ class PostDetail(DetailView):
 
     model = models.Post
 
+class SearchView(View):
+    """This is the function for making the search view, not completed yet"""
+    pass
+
 class EditPostView(UpdateView):
     model = models.Post
     template_name = "posts/post_edit.html"
     fields = {
-        "title",
         "writter",
+        "title",
+        "location_info",
         "contents",
         "country",
-        "location_info",
         "latitude",
-        "longitude"
+        "longitude",
     }
 
 class EditPhotoView(UpdateView):
@@ -40,6 +44,27 @@ class EditPhotoView(UpdateView):
     def get_success_url(self):
         post_pk = self.kwargs.get("post_pk")
         return reverse("posts:photos", kwargs={"pk": post_pk})
+
+
+class PostPhotosView(DetailView):
+    model = models.Post
+    template_name = "posts/post_photos.html"
+
+    def get_object(self, queryset=None):
+        post = super().get_object(queryset=queryset)
+        return post
+
+
+class AddPhotoView(FormView):
+    model = models.Photo
+    template_name = "posts/photo_create.html"
+    fields = ("caption", "file")
+    form_class = forms.CreatePhotoForm
+    def form_valid(self, form):
+        pk = self.kwargs.get("pk")
+        form.save(pk)
+        messages.success(self.request, "Photo Uploaded")
+        return redirect(reverse("posts:photos", kwargs={"pk": pk}))
 
 
 class UploadPostView(FormView):

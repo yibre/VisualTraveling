@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block page_title %}
+    {{post.title}}'s Photos
+{% endblock page_title %}
+{% block search-bar %}
+{% endblock search-bar %}
+{% block content %}
+     
+    <div>
+        {% for photo in post.photos.all  %}
+            <div>
+                <div class="flex items-start">
+                    <img src="{{photo.file.url}}" class="w-32 h-32" />
+                    <span class="ml-5 text-xl">{{photo.caption}}</span>
+                </div>
+                <div>
+                    <a class="btn-link mb-5 bg-teal-500" href="{% url 'posts:edit-photo' post.pk photo.pk %}">Edit</a>
+                    <a class="btn-link bg-red-600" href="{% url 'posts:delete-photo' post.pk photo.pk %}">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="flex justify-center mt-5">
+            <a href="{% url 'posts:edit' post.pk %}" class="text-teal-500 font-medium text-xl">Back to edit post</a>
+        </div>
+
+    </div>
+{% endblock content %} 

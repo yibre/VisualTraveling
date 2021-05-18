@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-    Upload Post
+    Upload photo
 {% endblock page_title %}
 
 {% block search-bar %}
@@ -9,31 +9,30 @@
 
 {% block content %}
      
-    <div class="bg-gray-100">
+    <div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center border p-6 border-gray-400">
 
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" class="w-full" enctype="multipart/form-data">
             {% csrf_token %}
             
             {% if form.non_field_errors %}
                 {% for error in form.non_field_errors %}
-                    <span>{{error}}</span> 
+                    <span class="text-red-700 font-medium text-sm">{{error}}</span> 
                 {% endfor %}
             {% endif %}
             
             {% for field in form %}
-            <div>
-                <div>{{field.label}}</div>
-                <div>{{field}}</div>
+            <div class="input w-full {% if field.errors %}has_error{% endif %}">
+                {{field.label}}
+                {{field}}
                 {% if field.errors %}
                     {% for error in field.errors %}
-                        <span>{{error}}</span> 
+                        <span class="text-red-700 font-medium text-sm">{{error}}</span> 
                     {% endfor %}
                 {% endif %}
             </div>
             {% endfor %}
-            <button>
-                {{cta}} upload
-            </button>
+            
+            <button class="btn bg-red-500 text-white">{{cta}}</button>
         </form>
             
     </div>
