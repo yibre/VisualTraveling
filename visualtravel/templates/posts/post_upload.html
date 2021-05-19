@@ -1,29 +1,23 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-    Upload Post
+    Update Room
 {% endblock page_title %}
 
 {% block search-bar %}
 {% endblock search-bar %}
 
 {% block content %}
-     
-    <div class="bg-gray-100">
+<!-- Done by YoonCheol -->
+    <div>
 
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                    <span>{{error}}</span> 
-                {% endfor %}
-            {% endif %}
-            
+        
             {% for field in form %}
             <div>
-                <div>{{field.label}}</div>
-                <div>{{field}}</div>
+                {{field.label}}
+                {{field}}
                 {% if field.errors %}
                     {% for error in field.errors %}
                         <span>{{error}}</span> 
@@ -31,10 +25,12 @@
                 {% endif %}
             </div>
             {% endfor %}
-            <button>
-                {{cta}} upload
-            </button>
-        </form>
-            
+        
+            <button class="text-white rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-700 bg-red-300 hover:bg-red-500 ">{{cta}}Submit</button>
+            <div>
+                <a href="{% url 'posts:photos' post.pk %}">Update Photos</a>
+            </div>
+        </form> 
+
     </div>
-{% endblock content %}
+{% endblock content %} 
