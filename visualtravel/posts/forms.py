@@ -38,7 +38,6 @@ class CreatePhotoForm(forms.ModelForm):
 
     def save(self, pk, *args, **kwargs):
         photo = super().save(commit=False)
-        print(pk)
         post = models.Post.objects.get(pk=pk)
         photo.post = post
         photo.save()
