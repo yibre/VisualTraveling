@@ -19,6 +19,7 @@ urlpatterns = [
         views.delete_photo,
         name="delete-photo",
     ),
+    path("<int:pk>/delete/", views.delete_post, name="delete"),
 ]
 """
     path(
