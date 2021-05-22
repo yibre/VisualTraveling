@@ -80,7 +80,6 @@ class UploadPostView(FormView):
         return redirect(reverse("posts:detail", kwargs={"pk": post.pk}))
 
 def delete_photo(request, post_pk, photo_pk):
-    # user = request.user
     try:
         post = models.Post.objects.get(pk=post_pk)
         models.Photo.objects.filter(pk=photo_pk).delete()
@@ -88,3 +87,23 @@ def delete_photo(request, post_pk, photo_pk):
         return redirect(reverse("posts:photos", kwargs={"pk": post_pk}))
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))
+
+"""
+def delete_post(request, post_pk):
+    print("delete post function activated", post_pk)
+    post = models.Post.objects.filter(pk=post_pk)
+    post.delete()
+    try:
+        post = models.Post.objects.get(pk=post_pk)
+        post.delete()
+        print(f"should delete {post_pk}")
+        print(post)
+        message.success(request, "post deleted")
+    except models.Post.DoesNotExist:
+        return redirect(reverse("core:home"))
+        """
+
+def delete_post(request, post_id=None):
+    post_to_delete=Post.objects.get(id=post_id)
+    post_to_delete.delete()
+    return redirect(reverse("core:home"))

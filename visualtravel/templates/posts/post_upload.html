@@ -1,40 +1,42 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-    Upload Post
+Upload Post
 {% endblock page_title %}
 
 {% block search-bar %}
 {% endblock search-bar %}
 
 {% block content %}
-     
-    <div class="bg-gray-100">
 
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                    <span>{{error}}</span> 
-                {% endfor %}
-            {% endif %}
-            
-            {% for field in form %}
-            <div>
-                <div>{{field.label}}</div>
-                <div>{{field}}</div>
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                        <span>{{error}}</span> 
-                    {% endfor %}
-                {% endif %}
-            </div>
+{% %}
+
+<div class="bg-gray-100">
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <span>{{error}}</span>
+        {% endfor %}
+        {% endif %}
+
+        {% for field in form %}
+        <div>
+            <div>{{field.label}}</div>
+            <div>{{field}}</div>
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <span>{{error}}</span>
             {% endfor %}
-            <button>
-                {{cta}} upload
-            </button>
-        </form>
-            
-    </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button>
+            {{cta}} upload
+        </button>
+    </form>
+
+</div>
 {% endblock content %}
