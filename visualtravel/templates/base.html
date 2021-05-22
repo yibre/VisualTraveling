@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +13,24 @@
 </head>
 
 <body>
-  {% include "partials/header.html" %}
+  <header class="container max-w-full flex items-center justify-between px-6 h-20 border-b border-gray-400">
+    <div class="flex items-center w-1/3">
+      <a href="{% url 'core:home' %}" class="mr-6">
+        <img class="w-60" src="{% static 'VisualTravel.png' %}" />
+      </a>
+      {% block search-bar %}
+      <form method="get" action="{% url 'posts:search' %}">
+        <input
+          class="search-box border px-5 w-full font-medium text-gray-900 placeholder-gray-600 py-3 rounded-sm w-64 shadow-md hover:shadow-lg focus:outline-none"
+          name="city" placeholder="Search By City" />
+      </form>
+      {% endblock search-bar %}
+    </div>
+    <div class="float-right ">
+      <a href="{% url 'posts:upload'%}"><span class="no-underline hover:underline">Upload</span></a>
+      <a href="#"><span class="no-underline hover:underline">Login</span></a>
+  </div>
+  </header>
 
   {% block content %}{% endblock %}
 
