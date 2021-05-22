@@ -71,7 +71,7 @@ class UploadPostView(FormView):
     """ for update the photos """
 
     form_class=forms.UploadPostForm
-    template_name = "posts/post_upload.html"
+    template_name = "posts/post_create.html"
 
     def form_valid(self, form):
         post = form.save()
