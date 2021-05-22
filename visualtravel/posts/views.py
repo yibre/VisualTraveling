@@ -88,22 +88,16 @@ def delete_photo(request, post_pk, photo_pk):
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))
 
-"""
-def delete_post(request, post_pk):
-    print("delete post function activated", post_pk)
-    post = models.Post.objects.filter(pk=post_pk)
+
+def post_delete(request, pk):
+    print("delete post function activated", pk)
+    post = models.Post.objects.filter(pk=pk)
     post.delete()
     try:
-        post = models.Post.objects.get(pk=post_pk)
+        post = models.Post.objects.get(pk=pk)
         post.delete()
-        print(f"should delete {post_pk}")
+        print(f"should delete {pk}")
         print(post)
         message.success(request, "post deleted")
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))
-        """
-
-def delete_post(request, post_id=None):
-    post_to_delete=Post.objects.get(id=post_id)
-    post_to_delete.delete()
-    return redirect(reverse("core:home"))
