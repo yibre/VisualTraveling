@@ -96,7 +96,6 @@ def post_delete(request, pk):
     try:
         post = models.Post.objects.get(pk=pk)
         post.delete()
-        print(f"should delete {pk}")
         print(post)
         message.success(request, "post deleted")
     except models.Post.DoesNotExist:
