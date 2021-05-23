@@ -8,7 +8,7 @@ urlpatterns = [
     path("<int:pk>/edit/", views.EditPostView.as_view(), name="edit"),
     path("upload/", views.UploadPostView.as_view(), name="upload"),
     path("<int:pk>/delete/", views.post_delete, name="delete"),
-    path("search/", views.SearchView.as_view(), name="search"),
+    path("search/", views.search, name="search"),
     path("<int:pk>/photos/", views.PostPhotosView.as_view(), name="photos"),
     path("<int:pk>/photos/add", views.AddPhotoView.as_view(), name="add-photo"),
     path(

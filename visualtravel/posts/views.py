@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView, View, UpdateView, FormVie
 from django.shortcuts import render, redirect, reverse
 from . import models, forms
 from django.contrib import messages
+from django.db.models import Q
 
 
 class HomeView(ListView):
@@ -16,9 +17,30 @@ class PostDetail(DetailView):
 
     model = models.Post
 
-class SearchView(View):
-    """This is the function for making the search view, not completed yet"""
-    pass
+
+def search(request):
+
+    print("here")
+    if request.method == 'GET':
+        query= request.GET.get('q')
+        print(query)
+        submitbutton= request.GET.get('submit')
+
+        if query is not None:
+            lookups= Q(title__icontains=query) | Q(contents__icontains=query) | Q(location_info__icontains=query) | Q(country__icontains=query)
+            results= models.Post.objects.filter(lookups).distinct()
+            print("result is ", results)
+            context={'results': results,
+                     'submitbutton': submitbutton}
+            return render(request, "posts/search.html")
+        else:
+            return render(request, "posts/search.html")
+    else:
+        print("here2")
+        return render(request, "posts/search.html")
+
+# http://www.learningaboutelectronics.com/Articles/How-to-add-search-functionality-to-a-website-in-Django.php
+# how to make a search function in here
 
 class EditPostView(UpdateView):
     model = models.Post
