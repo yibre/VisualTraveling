@@ -22,6 +22,8 @@ urlpatterns = [
     path("", include("core.urls", namespace="core")),
     path("posts/", include("posts.urls", namespace="posts")),
     path("admin/", admin.site.urls),
+    path("users/", include("users.urls", namespace="users")),
+    path("lists/", include("lists.urls", namespace="lists")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

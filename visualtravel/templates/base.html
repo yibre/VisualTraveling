@@ -31,8 +31,9 @@
     </div>
     <div class="float-right ">
       <a href="{% url 'posts:upload'%}"><span class="no-underline hover:underline">Upload</span></a>
-      <a href="#"><span class="no-underline hover:underline">Login</span></a>
-  </div>
+      <a href="{% url 'lists:postlists' %}">my list</a>
+
+      </div>
   </header>
 
   {% block content %}{% endblock %}
