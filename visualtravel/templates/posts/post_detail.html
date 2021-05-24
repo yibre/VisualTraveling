@@ -24,7 +24,7 @@
   initMap();
 </script>
 <div class ="flex align-center mx-auto justify-center w-2/5">
-  <img src="{{post.get_photos}}" class="w-full" />
+  <img src="{{post.get_photos}}" class="w-full" style="border: 10px solid #000; " vspace="30" hspace="20"/>
 </div>
 <div class="flex justify-center">
   <div id="map" class="w-2/5 h-96"></div>
@@ -46,13 +46,21 @@
     <div class="lg:w-3/3 rounded-sm  border-2 py-1 px-4 border-opacity-50 border-red-500 bg-white">{{post.camera}}</div>
 
     <br><br>
-    <div><a href="{% url 'posts:edit' post.pk %} ">
-        <button
-          class="text-black rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-500 bg-white hover:bg-red-300 ">
-          Edit Post
-        </button></a>
-
-      <a href="{% url 'posts:delete' post.pk %}"> Delete Post </a>
+    <div>
+      <div style="float:left; ">
+        <a href="{% url 'posts:edit' post.pk %} ">
+          <button class="text-black rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-500 bg-white hover:bg-red-300 ">
+            Edit Post
+          </button>
+        </a>
+      </div>
+      <div style="float:right; ">
+        <a href="{% url 'posts:delete' post.pk %}"> 
+          <button class="text-black rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-500 bg-white hover:bg-red-300 ">
+            Delete Post 
+          </button>
+        </a>
+      </div>
     </div>
   </div>
 </div>
