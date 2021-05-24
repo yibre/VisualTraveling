@@ -19,8 +19,6 @@ class PostDetail(DetailView):
 
 
 def search(request):
-
-    print("here")
     if request.method == 'GET':
         query= request.GET.get('q')
         print(query)
@@ -36,7 +34,6 @@ def search(request):
         else:
             return render(request, "posts/search.html")
     else:
-        print("here2")
         return render(request, "posts/search.html")
 
 # http://www.learningaboutelectronics.com/Articles/How-to-add-search-functionality-to-a-website-in-Django.php

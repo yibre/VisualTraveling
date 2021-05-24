@@ -8,4 +8,12 @@ from . import models
 class PostsListView(ListView):
     """blablabla"""
     model = models.List
-    template_name = "lists/posts_list.html"
+    template_name = "lists/list.html"
+    # context = model.objects.all()[:1].get()
+    context_object_name = 'posts'
+
+##request.user.users.all()
+    def get_object(self, queryset=None):
+        onelist = super().get_object(queryset=queryset)
+        posts = onelist.posts.all()
+        return posts

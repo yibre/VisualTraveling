@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block page_title %}
+    Search
+{% endblock page_title %}
+
+{% block content %}
+
+    {% for list in posts  %}
+            <a href="/posts/{{post.pk}}">
+                {% include 'partials/post_card.html' with post=post %}
+            </a>
+    <h1>hello</h1>
+    {% endfor %}
+
+
+{% endblock content %} 
