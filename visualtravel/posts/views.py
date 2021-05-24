@@ -32,7 +32,7 @@ def search(request):
             print("result is ", results)
             context={'results': results,
                      'submitbutton': submitbutton}
-            return render(request, "posts/search.html")
+            return render(request, "posts/search.html", context)
         else:
             return render(request, "posts/search.html")
     else:

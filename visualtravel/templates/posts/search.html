@@ -5,13 +5,9 @@
 
 {% block content %}
 
-    <h1>Search Page i love you a lot</h1>
+    <h1>Search Page</h1>
 
     <br/>
-    <form action="{% url 'posts:search' %}" method="GET" value="{{request.GET.q}}">
-    Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search posts"/>
-    <input type="submit" name="submit" value="Search"/>
-    </form>
     
     
     {% if results %}
@@ -19,14 +15,17 @@
         <br/><br/>
         
         {% for result in results %}
-            <h6>hi</h6>
-            {{result.country}}
-            {{result.title}}
-            <br/>
-        
-            {{result.contents}}
-            <br/>
-        
+            <div class="">
+                <a href="/posts/{{result.pk}}">
+                    <div class ="flex mx-auto align-center justify-center w-2/5">
+                        <img src="{{result.get_photos}}" class="w-full"/>
+                    </div>
+                    <div class="align-center ">{{result.country}}</div>
+                    <div>{{result.title}}</div>
+                    <div>{{result.location_info}}</div>
+                    <div>{{result.contents}}</div>
+                </a>
+            </div>
             {% endfor %}
     {% else %}
         No search results for this
