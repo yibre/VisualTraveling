@@ -119,3 +119,16 @@ def post_delete(request, pk):
         message.success(request, "post deleted")
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))
+
+
+class FavoritePlacesView(ListView):
+    """ This is for making favorite list """
+
+    model = models.Post
+    template_name="posts/fav_list.html"
+
+    def get_object(self, queryset=None):
+        favposts = models.Post.objects.filter(love=True)
+        print("hello")
+        print(favposts)
+        return favposts

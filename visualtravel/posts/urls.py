@@ -11,6 +11,7 @@ urlpatterns = [
     path("search/", views.search, name="search"),
     path("<int:pk>/photos/", views.PostPhotosView.as_view(), name="photos"),
     path("<int:pk>/photos/add", views.AddPhotoView.as_view(), name="add-photo"),
+    path("favorite/", views.FavoritePlacesView.as_view(), name="favlist"),
     path(
         "<int:post_pk>/photos/<int:photo_pk>/edit/",
         views.EditPhotoView.as_view(),

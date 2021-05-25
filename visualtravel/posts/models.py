@@ -26,6 +26,7 @@ class Post(core_models.TimeStampedModel):
         max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(
         max_digits=9, decimal_places=6, null=True, blank=True)
+    love = models.BooleanField(default=False)
     
     
     def __str__(self):
