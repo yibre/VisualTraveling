@@ -1,36 +1,43 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-    Create Room
+Create Room
 {% endblock page_title %}
 
 {% block content %}
-     
-    <div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center text-left rounded-3xl  border-2 py-4 px-1 border-opacity-50 border-red-500 bg-gray-200 ">
+{% load static %}
+<script src="{% static 'location_picker.js' %}"></script>
+<link rel="stylesheet" href="{%  static  'location_picker.css'  %}">
 
-        <form method="POST" class="w-full" enctype="multipart/form-data">
-            {% csrf_token %}
-            
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                    <span class="text-red-700 font-medium text-sm ">{{error}}</span><br>
-                {% endfor %}
-            {% endif %}
-            
-            {% for field in form %}
-            <div class="input w-3/3 lg:w-5/5 text-black rounded-3xl  border-2 py-3 px-3 border-opacity-50 border-red-700 bg-red-300{% if field.errors %}has_error{% endif %} "> 
-                {{field.label}}
-                {{field}}
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                        <span class="text-red-700 font-medium text-sm ">{{error}}</span>
-                    {% endfor %}
-                {% endif %}
-            </div><br>
+<div id="map" class="setloc-map"></div>
+<div
+    class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center text-left rounded-3xl  border-2 py-4 px-1 border-opacity-50 border-red-500 bg-gray-200 ">
+
+    <form method="POST" class="w-full" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <span class="text-red-700 font-medium text-sm ">{{error}}</span><br>
+        {% endfor %}
+        {% endif %}
+
+        {% for field in form %}
+        <div
+            class="input w-3/3 lg:w-5/5 text-black rounded-3xl  border-2 py-3 px-3 border-opacity-50 border-red-700 bg-red-300{% if field.errors %}has_error{% endif %} ">
+            {{field.label}}
+            {{field}}
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <span class="text-red-700 font-medium text-sm ">{{error}}</span>
             {% endfor %}
-            <button class="text-black rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-500 bg-white hover:bg-red-300 ">Upload</button>
-        </form>
-        
-            
-    </div>
+            {% endif %}
+        </div><br>
+        {% endfor %}
+        <button
+            class="text-black rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-500 bg-white hover:bg-red-300 ">Upload</button>
+    </form>
+
+
+</div>
 {% endblock content %}

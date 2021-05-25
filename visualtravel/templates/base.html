@@ -30,8 +30,9 @@
       {% endblock search-bar %}
     </div>
     <div class="float-right ">
-      <a href="{% url 'posts:upload'%}"><span class="no-underline hover:underline">Upload</span></a>
-      <a href="{% url 'posts:favlist' %}">my list</a>
+      <a href="{% url 'posts:upload'%}"><span class="no-underline hover:underline font-bold">UPLOAD</span></a>
+      <span>|</span>
+      <a href="{% url 'posts:favlist' %}"><span class="no-underline hover:underline font-bold">MY LIST</span></a>
 
       </div>
   </header>
