@@ -8,15 +8,18 @@
 {% block content %}
 {% load static %}
 
-<div class="container mx-auto">
+<div class="container relative mx-auto">
+    <div class="absolute bg-cover bg-center w-full h-80" style="background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/a947c644353251.5810765f94d0d.jpg)"></div>
+    <div class="absolute z-10 w-full m-0 h-80 text-gray-50 my-32 text-5xl text-center">Find The Place and Get Inspired</div>
+    <!--
+        <div class="w-full h-96">
+        <img src="{% static 'earthspace.jpg' %}" class ="bg-cover" alt="My image">
+    </div>
+    <div id="map" class="w-full h-96 bg-gray-300"></div>-->
 
-    <div id="map" class="w-full h-96 bg-gray-300"></div>
-
-    <div class="flex flex-wrap -mx-40">
+    <div class="absolute my-80 w-full flex flex-wrap justify-center">
         {% for post in posts  %}
-        <a href="/posts/{{post.pk}}">
             {% include 'partials/post_card.html' with post=post %}
-        </a>
         {% endfor %}
         </div>
     </div>
