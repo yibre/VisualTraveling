@@ -109,14 +109,11 @@ def delete_photo(request, post_pk, photo_pk):
 
 
 def post_delete(request, pk):
-    print("delete post function activated", pk)
-    post = models.Post.objects.filter(pk=pk)
-    post.delete()
     try:
         post = models.Post.objects.get(pk=pk)
         post.delete()
-        print(post)
-        message.success(request, "post deleted")
+        messages.success(request, "post deleted")
+        return redirect(reverse("core:home"))
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))
 
@@ -124,11 +121,28 @@ def post_delete(request, pk):
 class FavoritePlacesView(ListView):
     """ This is for making favorite list """
 
-    model = models.Post
     template_name="posts/fav_list.html"
+    context_object_name = "favposts"
+    queryset = models.Post.objects.filter(love=True)
 
-    def get_object(self, queryset=None):
-        favposts = models.Post.objects.filter(love=True)
-        print("hello")
-        print(favposts)
-        return favposts
+
+def add_favlist(request, pk):
+    print("add fav function activate!")
+    try:
+        post = models.Post.objects.get(pk=pk)
+        post.love = True
+        post.save()
+        return redirect(reverse("posts:detail", kwargs={"pk": pk}))
+    except models.Post.DoesNotExist:
+        return redirect(reverse("core:home"))
+
+
+def delete_favlist(request, pk):
+    print("add fav function activate!")
+    try:
+        post = models.Post.objects.get(pk=pk)
+        post.love = False
+        post.save()
+        return redirect(reverse("posts:detail", kwargs={"pk": pk}))
+    except models.Post.DoesNotExist:
+        return redirect(reverse("core:home"))
