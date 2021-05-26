@@ -61,8 +61,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# middleware에 포함되어 있던거: 'django.contrib.sessions.middleware.SessionMiddleware',
-
 ROOT_URLCONF = 'visualtravel.urls'
 
 TEMPLATES = [

@@ -26,12 +26,12 @@
                 {% endif %}
             </div> 
             {% endfor %}
-            <button class="text-white rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-700 bg-red-300 hover:bg-red-500 " >
+            <button class="text-black rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-500 bg-white hover:bg-red-300" >
                 {{cta}}Submit
             </button>            
-            <div class="mt-5">
+            <button class="text-black rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-500 bg-white hover:bg-red-300">
                 <a href="{% url 'posts:photos' post.pk %}" class="text-teal-500 font-medium">Edit Photos</a>
-            </div>
+            </button>
         </form> 
 
     </div>
