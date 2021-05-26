@@ -5,32 +5,22 @@
 
 {% block content %}
 
-    <h1>Search Page</h1>
-
     <br/>
     
-    
-    {% if results %}
-        <h1>Results for <b>{{ request.GET.q }}</b></h1>
-        <br/><br/>
-        
-        {% for result in results %}
-            <div class="">
-                <a href="/posts/{{result.pk}}">
-                    <div class ="flex mx-auto align-center justify-center w-2/5">
-                        <img src="{{result.get_photos}}" class="w-full"/>
-                    </div>
-                    <div class="align-center ">{{result.country}}</div>
-                    <div>{{result.title}}</div>
-                    <div>{{result.location_info}}</div>
-                    <div>{{result.contents}}</div>
-                </a>
-            </div>
+    <div class="mx-auto container">
+        {% if results %}
+            <div class="w-full text-center">Results for <b>{{ request.GET.q }}</b></div>
+            <br/><br/>
+            <div class="w-full flex flex-wrap justify-center">
+            
+            {% for post in results %}
+                {% include 'partials/post_card.html' with post=post %}
             {% endfor %}
-    {% else %}
+            </div>
+        {% else %}
         No search results for this
-    {% endif %}
-    
+        {% endif %}
+    </div>
 
 
 

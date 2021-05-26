@@ -14,6 +14,8 @@ urlpatterns = [
     path("favorite/", views.FavoritePlacesView.as_view(), name="favlist"),
     path("<int:pk>/addfav/", views.add_favlist, name="add-fav"),
     path("<int:pk>/deletefav/", views.delete_favlist, name="delete-fav"),
+    path("<int:pk>/main/addfav/", views.add_favlist_main, name="add-fav-main"),
+    path("<int:pk>/main/deletefav/", views.delete_favlist_main, name="delete-fav-main"),
     path(
         "<int:post_pk>/photos/<int:photo_pk>/edit/",
         views.EditPhotoView.as_view(),

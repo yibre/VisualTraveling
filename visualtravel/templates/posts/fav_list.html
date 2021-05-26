@@ -8,17 +8,22 @@ Home
 {% block content %}
 {% load static %}
 <script src="{% static 'js/post_list.js' %}"></script>
-<br>
-<h1 class="text-4xl">&nbsp;<i class="fas fa-user"></i>&nbsp;My list</h1>
-<br>
+<div class="flex flex-col my-auto items-center">
+    <br>
+    <h1 class="text-4xl">&nbsp;<i class="far fa-user-circle"></i>&nbsp;My list</h1>
+    <br>
+    <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color= #987cb9,direction=145,strength=15)" width="80%"
+        color=#987cb9 SIZE=1>
+    <br>
+</div>
+
 <div class="container mx-auto">
-    
+
 
     <div class="flex flex-wrap -mx-40">
         {% for post in favposts %}
         <a href="/posts/{{post.pk}}">
-            {{ post.title }}
-            hello
+
             {% include 'partials/post_card.html' with post=post %}
         </a>
         {% endfor %}

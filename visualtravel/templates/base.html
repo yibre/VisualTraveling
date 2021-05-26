@@ -22,11 +22,12 @@
       {% block search-bar %}
 
       <form action="{% url 'posts:search' %}" method="GET" value="{{request.GET.q}}">
-        <input class="search-box border px-5 w-full font-medium text-gray-900 placeholder-gray-600 py-3 rounded-sm shadow-md hover:shadow-lg focus:outline-none"
-        type="text" name="q" value="{{request.GET.q}}" placeholder="Search your inspration"/>
+        <input
+          class="search-box border px-5 w-96 font-medium text-gray-900 placeholder-gray-600 py-3 rounded-sm shadow-md hover:shadow-lg focus:outline-none"
+          type="text" name="q" value="{{request.GET.q}}" placeholder="What do you want to see?" />
 
       </form>
-      
+
       {% endblock search-bar %}
     </div>
     <div class="float-right ">
@@ -34,7 +35,7 @@
       <span>|</span>
       <a href="{% url 'posts:favlist' %}"><span class="no-underline hover:underline font-bold">MY LIST</span></a>
 
-      </div>
+    </div>
   </header>
 
   {% block content %}{% endblock %}
