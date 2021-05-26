@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect, reverse
 from . import models, forms
 from django.contrib import messages
 from django.db.models import Q
-
+from django.http import HttpResponseRedirect
+   
 
 class HomeView(ListView):
     """ home view definition """
@@ -96,7 +97,7 @@ class UploadPostView(FormView):
         post = form.save()
         post.save()
         messages.success(self.request, "Post Uploaded")
-        return redirect(reverse("posts:detail", kwargs={"pk": post.pk}))
+        return redirect(reverse("posts:add-photo", kwargs={"pk": post.pk}))
 
 def delete_photo(request, post_pk, photo_pk):
     try:
@@ -127,22 +128,41 @@ class FavoritePlacesView(ListView):
 
 
 def add_favlist(request, pk):
-    print("add fav function activate!")
     try:
         post = models.Post.objects.get(pk=pk)
         post.love = True
         post.save()
-        return redirect(reverse("posts:detail", kwargs={"pk": pk}))
+        return HttpResponseRedirect(request.path_info)
+        # return redirect(reverse("posts:detail", kwargs={"pk": pk}))
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))
 
 
 def delete_favlist(request, pk):
-    print("add fav function activate!")
     try:
         post = models.Post.objects.get(pk=pk)
         post.love = False
         post.save()
+        print(request.path)
         return redirect(reverse("posts:detail", kwargs={"pk": pk}))
+    except models.Post.DoesNotExist:
+        return redirect(reverse("core:home"))
+
+def add_favlist_main(request, pk):
+    try:
+        post = models.Post.objects.get(pk=pk)
+        post.love = True
+        post.save()
+        return redirect(reverse("core:home", kwargs={"pk": pk}))
+    except models.Post.DoesNotExist:
+        return redirect(reverse("core:home"))
+
+
+def delete_favlist_main(request, pk):
+    try:
+        post = models.Post.objects.get(pk=pk)
+        post.love = False
+        post.save()
+        return redirect(reverse("core:home", kwargs={"pk": pk}))
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))

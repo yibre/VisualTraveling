@@ -6,10 +6,10 @@ Create Room
 
 {% block content %}
 {% load static %}
-<script src="{% static 'location_picker.js' %}"></script>
+
 <link rel="stylesheet" href="{%  static  'location_picker.css'  %}">
 
-<div id="map" class="setloc-map"></div>
+
 <div
     class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center text-left rounded-3xl  border-2 py-4 px-1 border-opacity-50 border-red-500 bg-gray-200 ">
 
@@ -37,7 +37,7 @@ Create Room
         <button
             class="text-black rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-500 bg-white hover:bg-red-300 ">Upload</button>
     </form>
-
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="{% static 'js/location_create.js' %}"></script>
 </div>
 {% endblock content %}
