@@ -15,6 +15,21 @@ Visual Traveling by HCI team project - by Visual Traveler
 * Tailwind CSS
 
 ## Backend Tables
+#### user
+| id    | email | language | country | password |
+| ----- | ----- | ---- | ---- | ---- |
+| char | char | char | char | char |
+
+#### post
+| id    | title | author | asdf | asdf |
+| ----- | ----- | ---- | ---- | ---- |
+
+#### photo
+| id | post | file | caption |
+| ---- | ---- | ---- | ---- | ---- |
+
+#### List
+| user | id | posts |
 
 ## Pages:
 ### Main Page:
