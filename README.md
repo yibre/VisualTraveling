@@ -22,7 +22,7 @@ Visual Traveling by KAIST 2021 Spring Introduction to Human Computer Interection
 | int | char | char | char | char |
 
 #### post
-| id    | title | author | location_info | picture |  |
+| id    | title | author | location_info | picture |
 | ----- | ----- | ---- | ---- | ---- |
 | int | char | char | char | char |
 
