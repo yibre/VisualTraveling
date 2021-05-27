@@ -1,12 +1,13 @@
 # VisualTraveling
-Visual Traveling by HCI team project - by Visual Traveler
-
+Visual Traveling by KAIST 2021 Spring Introduction to Human Computer Interection team project - by Visual Traveler
 
 # Hosting cite: http://yibre.gabia.io/
 
 # Team Member
-* 2014
+* 20140762 YunCheol Ha
 * 20186651 Doyeon Choi
+* 20214902 Xiangchi Song
+* 20214903 Letian Zhang
 
 ---
 # Implementation
