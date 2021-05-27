@@ -66,11 +66,8 @@ base.html, post_card.html
 fav_list.html: to align the post cards that users added
 
 ### Upload, edit Post:
-html files in this page: post_form.html, post_create.html, photo_create.html, post_photos.html
-post_create.html: to upload the post, they have to fill the form of it.
-post_photos.html: It's the page to see the photo list of each post
-photo_create.html: Adding the caption and upload file page
-post_form.html: to edit the post, users have to fill the form of it.
-
-
-
+html files in this page: post_form.html, post_create.html, photo_create.html, post_photos.html  
+post_create.html: to upload the post, they have to fill the form of it.  
+post_photos.html: It's the page to see the photo list of each post  
+photo_create.html: Adding the caption and upload file page  
+post_form.html: to edit the post, users have to fill the form of it.  
