@@ -132,8 +132,8 @@ def add_favlist(request, pk):
         post = models.Post.objects.get(pk=pk)
         post.love = True
         post.save()
-        return HttpResponseRedirect(request.path_info)
-        # return redirect(reverse("posts:detail", kwargs={"pk": pk}))
+        # return HttpResponseRedirect(request.path_info)
+        return redirect(reverse("posts:detail", kwargs={"pk": pk}))
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))
 
@@ -153,7 +153,7 @@ def add_favlist_main(request, pk):
         post = models.Post.objects.get(pk=pk)
         post.love = True
         post.save()
-        return redirect(reverse("core:home", kwargs={"pk": pk}))
+        return redirect(reverse("core:home"))
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))
 
@@ -163,6 +163,33 @@ def delete_favlist_main(request, pk):
         post = models.Post.objects.get(pk=pk)
         post.love = False
         post.save()
-        return redirect(reverse("core:home", kwargs={"pk": pk}))
+        return redirect(reverse("core:home"))
+    except models.Post.DoesNotExist:
+        return redirect(reverse("core:home"))
+
+def add_favlist_search(request, pk):
+    try:
+        post = models.Post.objects.get(pk=pk)
+        post.love = True
+        post.save()
+        return redirect(reverse("posts:search"))
+    except models.Post.DoesNotExist:
+        return redirect(reverse("core:home"))
+
+def delete_favlist_search(request, pk):
+    try:
+        post = models.Post.objects.get(pk=pk)
+        post.love = False
+        post.save()
+        return redirect(reverse("posts:search"))
+    except models.Post.DoesNotExist:
+        return redirect(reverse("core:home"))
+
+def delete_favlist_fav(request, pk):
+    try:
+        post = models.Post.objects.get(pk=pk)
+        post.love = False
+        post.save()
+        return redirect(reverse("posts:favlist"))
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))

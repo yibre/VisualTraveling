@@ -1,20 +1,48 @@
-<div class="bg-gray-100 p-0.5 m-2 max-w-md">
+<div class="bg-gray-100 p-3.5 m-2 max-w-md rounded-2xl">
     <a href="/posts/{{post.pk}}">
         <img src="{{post.get_photos}}" class=" rounded-2xl" style="width: 400px; max-width: 100%; height: auto; "
-            vspace="30" hspace="20"></a>
+            ></a>
     <div class="text-2xl">{{post.title}}</div>
-    <div>{{post.location_info}}</div>
-    <div>{{post.camera}}</div>
-    <p>URL of this page: {{ request.path }} | {{ request.get_full_path }}</p>
+    <div><i class="fa fa-location-arrow" aria-hidden="true"></i> {{post.location_info}}</div>
+    <div><i class="fa fa-camera" aria-hidden="true"></i> {{post.camera}}</div>
     {% if post.love %}
-    <a href="/posts/{{post.pk}}/deletefav">
-        <div><i class="fa fa-heart" aria-hidden="true"></i></div>
-    </a>
+        {% if request.path == "/posts/search/" %}
+        <a href="/posts/{{post.pk}}/search/deletefav">
+            
+        </a>
+        {% elif request.path == "/" %}
+        <a href="/posts/{{post.pk}}/main/deletefav">
+            {% include "partials/addfavbtn.html" %}
+        </a>
+        {% elif request.path == "/posts/favorite/" %}
+        <a href="/posts/{{post.pk}}/fav/deletefav">
+            {% include "partials/addfavbtn.html" %}
+        </a>
+        {% else %}
+        <a href="/posts/{{post.pk}}/deletefav">
+            {% include "partials/addfavbtn.html" %}
+        </a>
+        {% endif %}
+
 
     {% else %}
-    <a href="/posts/{{post.pk}}/addfav">
-        <div>add</div>
-    </a>
+        {% if request.path == "/posts/search/" %}
+        <a href="/posts/{{post.pk}}/search/addfav">
+            
+        </a>
+        {% elif request.path == "/" %}
+        <a href="/posts/{{post.pk}}/main/addfav">
+            {% include "partials/delfavbtn.html" %}
+        </a>
+        {% elif request.path == "/posts/favorite/" %}
+        <a href="/posts/{{post.pk}}/fav/addfav">
+            {% include "partials/delfavbtn.html" %}
+        </a>
+        {% else %}
+        <a href="/posts/{{post.pk}}/addfav">
+            {% include "partials/delfavbtn.html" %}
+        </a>
+        {% endif %}
     {% endif %}
 
 </div>

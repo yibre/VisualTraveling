@@ -20,7 +20,7 @@ class Post(core_models.TimeStampedModel):
     contents = models.TextField()
     likes = models.IntegerField( default = 0)
     location_info = models.CharField(max_length=80, blank=True, null=True)
-    country = CountryField(blank=True, null=True, blank_label='South Korea')
+    country = CountryField(blank=True, default="KR")
     camera = models.CharField(max_length=80, blank=True, null=True)
     latitude = models.DecimalField(
         max_digits=9, decimal_places=6, null=True, blank=True)
