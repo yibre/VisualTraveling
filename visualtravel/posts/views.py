@@ -51,6 +51,7 @@ class EditPostView(UpdateView):
         "country",
         "latitude",
         "longitude",
+        "file"
     }
 
 class EditPhotoView(UpdateView):
@@ -97,7 +98,7 @@ class UploadPostView(FormView):
         post = form.save()
         post.save()
         messages.success(self.request, "Post Uploaded")
-        return redirect(reverse("posts:add-photo", kwargs={"pk": post.pk}))
+        return redirect(reverse("posts:detail", kwargs={"pk": post.pk}))
 
 def delete_photo(request, post_pk, photo_pk):
     try:

@@ -25,6 +25,7 @@ class UploadPostForm(forms.ModelForm):
             "camera",
             "latitude",
             "longitude",
+            "file",
         )
 
     def save(self, *args, **kwargs):
