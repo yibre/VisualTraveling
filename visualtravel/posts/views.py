@@ -22,13 +22,13 @@ class PostDetail(DetailView):
 def search(request):
     if request.method == 'GET':
         query= request.GET.get('q')
-        print(query)
+        #print(query)
         submitbutton= request.GET.get('submit')
 
         if query is not None:
-            lookups= Q(title__icontains=query) | Q(contents__icontains=query) | Q(location_info__icontains=query) | Q(country__icontains=query)
+            lookups= Q(title__icontains=query) | Q(contents__icontains=query) | Q(location_info__icontains=query) | Q(country__icontains=query) |Q(camera__icontains=query)
             results= models.Post.objects.filter(lookups).distinct()
-            print("result is ", results)
+            #print("result is ", results)
             context={'results': results,
                      'submitbutton': submitbutton}
             return render(request, "posts/search.html", context)
@@ -44,7 +44,6 @@ class EditPostView(UpdateView):
     model = models.Post
     template_name = "posts/post_edit.html"
     fields = {
-        "writter",
         "title",
         "location_info",
         "contents",
@@ -144,7 +143,6 @@ def delete_favlist(request, pk):
         post = models.Post.objects.get(pk=pk)
         post.love = False
         post.save()
-        print(request.path)
         return redirect(reverse("posts:detail", kwargs={"pk": pk}))
     except models.Post.DoesNotExist:
         return redirect(reverse("core:home"))

@@ -11,7 +11,7 @@ Upload Post
 
 {% %}
 
-<div class="bg-gray-100">
+<div>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -21,7 +21,6 @@ Upload Post
         <span>{{error}}</span>
         {% endfor %}
         {% endif %}
-
         {% for field in form %}
         <div>
             <div>{{field.label}}</div>

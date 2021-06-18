@@ -16,7 +16,7 @@ class Photo(core_models.TimeStampedModel):
 
 class Post(core_models.TimeStampedModel):
     file = models.ImageField(upload_to="post_photos", default='https://media1.giphy.com/media/3oz8xBgi2syJQiMJAQ/giphy.gif')
-    writter = models.ForeignKey("users.User", related_name="posts", on_delete=models.CASCADE)
+    writter = models.ForeignKey("users.User", related_name="posts", on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=80)
     contents = models.TextField()
     likes = models.IntegerField( default = 0)

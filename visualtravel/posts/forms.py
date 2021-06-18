@@ -17,7 +17,6 @@ class UploadPostForm(forms.ModelForm):
     class Meta:
         model = models.Post
         fields = (
-            "writter",
             "title",
             "contents",
             "country",

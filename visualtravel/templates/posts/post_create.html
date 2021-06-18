@@ -6,41 +6,87 @@ Create Room
 
 {% block content %}
 {% load static %}
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZliH4l5UHcPVzOzhhJaYBwtpIRFo5IAY&callback=initMap&libraries=&v=weekly"
+  async></script>
 
-<link rel="stylesheet" href="{%  static  'location_picker.css'  %}">
-<div class="flex flex-col my-auto items-center">
+<link rel="stylesheet" href="{%  static  'post_create.css'  %}">
+<script>
+var map;
+  function initialize() {
+  var myLatlng = new google.maps.LatLng(40.713956,-74.006653);
+  console.log("this is initialize");
+  var myOptions = {
+     zoom: 12,
+     center: myLatlng,
+     }
+  map = new google.maps.Map(document.getElementById("map_canvas")); 
 
-    <h2 class="text-2xl font-normal text-left">Hello! Dear photographer: let's get started</h2>
+  var marker = new google.maps.Marker({
+  draggable: true,
+  position: myLatlng, 
+  map: map,
+  title: "Your location"
+  });
 
-</div>
-<div
-    class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center text-left rounded-3xl  border-2 py-4 px-1 border-opacity-50 border-red-500 bg-gray-200 ">
+  google.maps.event.addListener(marker,'click',function(overlay,point){
+     document.getElementById("id_latitude").value = lat();
+     document.getElementById("id_longitude").value = lng();
+     });
+  google.maps.event.addListener(marker, 'click', function (event) {
+    document.getElementById("id_latitude").value = event.latLng.lat();
+    document.getElementById("id_longitude").value = event.latLng.lng();
+  });
 
-    <form method="POST" class="w-full" enctype="multipart/form-data">
-        {% csrf_token %}
+  google.maps.event.addListener(marker, 'click', function (event) {
+    document.getElementById("id_latitude").value = this.getPosition().lat();
+    document.getElementById("id_longitude").value = this.getPosition().lng();
+  });
 
-        {% if form.non_field_errors %}
+  google.maps.event.addListener(marker, 'dragend', function (event) {
+    document.getElementById("id_latitude").value = this.getPosition().lat();
+    document.getElementById("id_longitude").value = this.getPosition().lng();
+});
+
+}
+
+initialize();
+
+</script>
+
+<div id="map_canvas"></div>
+<div class="login-box">
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
-        <span class="text-red-700 font-medium text-sm ">{{error}}</span><br>
+            <span class="text-red-700 font-medium text-sm">{{error}}</span> 
         {% endfor %}
-        {% endif %}
+    {% endif %}
+    
 
-        {% for field in form %}
-        <div
-            class="input w-3/3 lg:w-5/5 text-black rounded-3xl  border-2 py-3 px-3 border-opacity-50 border-red-700 bg-red-300{% if field.errors %}has_error{% endif %} ">
-            {{field.label}}
-            {{field}}
-            {% if field.errors %}
-            {% for error in field.errors %}
-            <span class="text-red-700 font-medium text-sm ">{{error}}</span>
-            {% endfor %}
-            {% endif %}
-        </div><br>
+    {% for field in form %}
+          
+    <div class="{% if field.errors %}has_error{% endif %}">
+    <div class="user-box">
+        {{field.label}}
+        {{field}}
+    </div>
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <span class="text-red-700 font-medium text-sm">{{error}}</span> 
         {% endfor %}
-        <button
-            class="text-black rounded-3xl  border-2 py-1 px-4 border-opacity-50 border-red-500 bg-white hover:bg-red-300 ">Upload</button>
-    </form>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="{% static 'js/location_create.js' %}"></script>
+    {% endif %}
+    </div>
+    {% endfor %}
+    
+    <button>{{cta}}Upload</button>
+</form>
+
 </div>
+
+<script src="{% static 'post_create.js' %}"></script>
+
 {% endblock content %}
