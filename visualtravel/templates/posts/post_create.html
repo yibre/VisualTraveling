@@ -6,87 +6,68 @@ Create Room
 
 {% block content %}
 {% load static %}
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZliH4l5UHcPVzOzhhJaYBwtpIRFo5IAY&callback=initMap&libraries=&v=weekly"
-  async></script>
 
 <link rel="stylesheet" href="{%  static  'post_create.css'  %}">
 <script>
-var map;
-  function initialize() {
-  var myLatlng = new google.maps.LatLng(40.713956,-74.006653);
-  console.log("this is initialize");
-  var myOptions = {
-     zoom: 12,
-     center: myLatlng,
-     }
-  map = new google.maps.Map(document.getElementById("map_canvas")); 
-
-  var marker = new google.maps.Marker({
-  draggable: true,
-  position: myLatlng, 
-  map: map,
-  title: "Your location"
-  });
-
-  google.maps.event.addListener(marker,'click',function(overlay,point){
-     document.getElementById("id_latitude").value = lat();
-     document.getElementById("id_longitude").value = lng();
-     });
-  google.maps.event.addListener(marker, 'click', function (event) {
-    document.getElementById("id_latitude").value = event.latLng.lat();
-    document.getElementById("id_longitude").value = event.latLng.lng();
-  });
-
-  google.maps.event.addListener(marker, 'click', function (event) {
-    document.getElementById("id_latitude").value = this.getPosition().lat();
-    document.getElementById("id_longitude").value = this.getPosition().lng();
-  });
-
-  google.maps.event.addListener(marker, 'dragend', function (event) {
-    document.getElementById("id_latitude").value = this.getPosition().lat();
-    document.getElementById("id_longitude").value = this.getPosition().lng();
-});
-
-}
-
-initialize();
+  function initMap() {
+    // The location of Uluru
+    const uluru = { lat: 36.3721, lng: 127.3604 };
+    // The map, centered at Uluru
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      center: {lat: 35.1631, lng: 129.1636}
+    });
+    // The marker, positioned at Uluru
+    const marker = new google.maps.Marker({
+      position: uluru,
+      map: map,
+    });
+  }
+  initMap();
 
 </script>
-
-<div id="map_canvas"></div>
-<div class="login-box">
-
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    
-    {% if form.non_field_errors %}
-        {% for error in form.non_field_errors %}
-            <span class="text-red-700 font-medium text-sm">{{error}}</span> 
-        {% endfor %}
-    {% endif %}
-    
-
-    {% for field in form %}
-          
-    <div class="{% if field.errors %}has_error{% endif %}">
-    <div class="user-box">
-        {{field.label}}
-        {{field}}
+<div class="container">
+  <div class="additionalinfo">
+    <div class="files">
+      There's no file now
+      <div class="btn_addfile"><i class="fa fa-upload" aria-hidden="true"></i></div>
     </div>
-    {% if field.errors %}
+    <div id="map"></div>
+  </div>
+  <div class="login-box">
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+      <span class="text-red-700 font-medium text-sm">{{error}}</span>
+      {% endfor %}
+      {% endif %}
+
+
+      {% for field in form %}
+
+      <div class="{% if field.errors %}has_error{% endif %}">
+        <div class="user-box">
+          {{field.label}}
+          {{field}}
+        </div>
+        {% if field.errors %}
         {% for error in field.errors %}
-            <span class="text-red-700 font-medium text-sm">{{error}}</span> 
+        <span class="text-red-700 font-medium text-sm">{{error}}</span>
         {% endfor %}
-    {% endif %}
-    </div>
-    {% endfor %}
-    
-    <button>{{cta}}Upload</button>
-</form>
+        {% endif %}
+      </div>
+      {% endfor %}
 
+      <button>Upload</button>
+    </form>
+
+  </div>
 </div>
 
-<script src="{% static 'post_create.js' %}"></script>
-
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZliH4l5UHcPVzOzhhJaYBwtpIRFo5IAY&callback=initMap&libraries=&v=weekly"
+  async></script>
 {% endblock content %}
