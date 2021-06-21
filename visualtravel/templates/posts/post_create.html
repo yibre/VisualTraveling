@@ -14,8 +14,8 @@ Create Room
     const uluru = { lat: 36.3721, lng: 127.3604 };
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
-      center: {lat: 35.1631, lng: 129.1636}
+      zoom: 13,
+      center: uluru,
     });
     // The marker, positioned at Uluru
     const marker = new google.maps.Marker({
@@ -28,10 +28,14 @@ Create Room
 </script>
 <div class="container">
   <div class="additionalinfo">
-    <div class="files">
+      <img class="fit-picture"
+     src="http://yibre.gabia.io/media/post_photos/example0608_fqnqnM8.jpg">
+      
+    <!--<div class="files">
       There's no file now
       <div class="btn_addfile"><i class="fa fa-upload" aria-hidden="true"></i></div>
-    </div>
+    </div>--> 
+    
     <div id="map"></div>
   </div>
   <div class="login-box">

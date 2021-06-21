@@ -1,0 +1,111 @@
+.imagecontainer {
+    max-height: 30rem;
+    background-color: #222222;
+}
+
+.contents_info{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+    width: 80rem;
+    height: 25rem;
+    font-family: Verdana, 'Courier New', Courier, monospace;
+}
+
+#map {
+    width: 40rem;
+    margin-left: 1rem;
+    height: 24rem;
+}
+
+.contents_container{
+    width: 39rem;
+    height: 24rem;
+}
+
+.author_info{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.author_pic {
+    width: 80px;
+    height: 80px;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrSUBTd-5aepHwR_-Q-Zld54RHi5HAnZK-lA&usqp=CAU");
+    background-position: center center;
+    background-repeat: no-repeat;    
+    overflow: hidden;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.author_pic img {
+    object-fit: cover;
+}
+
+.author_nickname {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.author_name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.author_id {
+    font-size: 13px;
+}
+
+.content_title {
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.content_contents{
+    font-size: 20px;
+    color: #333;
+}
+
+.horizontal_line {
+    border-top: 1px solid #ccc;
+}
+
+.content_taken {
+    color: #444;
+}
+
+.content_loca{
+    color: #777;
+}
+
+.content_camera {
+    color: #777;
+}
+
+.content_country {
+    color: #777;
+}
+
+
+.editbtn, 
+.deletebtn {
+    width: 80px;
+    height: 30px;
+    border: 2px solid #ff9500;
+    color: #ff9500;
+    border-radius: 10px;
+    font-weight: 500;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+
+.notused{
+    background: -webkit-linear-gradient(left, #fae200, #fea200 90%);
+}
